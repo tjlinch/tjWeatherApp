@@ -22,10 +22,15 @@ searchEl.addEventListener('click', function() {
     .then(function (data) {
         console.log(data);
         if (data.cod !== 200){
+            //display message if input causes an error while retrieving data
             console.log("sorry");
         } else {
             currentHeaderEl.textContent = city + " " + moment().format("MMM Do YY") + " " + data.weather[0].icon;
-            console.log(data.weather[0].icon);
+            currentTempEl.textContent = "Temp: " + data.main.temp + "°F";
+            currentWindEl.textContent = "Wind: " + data.wind.speed + " MPH";
+            currentHumidityEl.textContent = "Humidity: " + data.main.humidity + " %";
+            currentUVEl.textContent = "UV Index: " + "placeholder";
+
         }
     })
     return;
