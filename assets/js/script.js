@@ -1,6 +1,6 @@
 //Show weather in any given city when the user submits a search request
 
-//Capture user city input
+//Variable Declarations
 var cityInputEl = document.getElementById('cityInput');
 var searchEl = document.getElementById('searchButton');
 var apiKey = "3a41fb29e2c055f4d8aacef579f499c3";
@@ -10,9 +10,19 @@ var currentTempEl = document.getElementById('currentTemp');
 var currentWindEl = document.getElementById('currentWind');
 var currentHumidityEl = document.getElementById('currentHumidity');
 var currentUVEl = document.getElementById('currentUV');
+var searchArray = [];
+
+
+
 //Capture user input and fetch weather for that city
 searchEl.addEventListener('click', function() {
     var city = cityInputEl.value;
+    searchArray.push(city);
+    console.log(searchArray);
+    localStorage.setItem('savedCities', JSON.stringify(searchArray));
+
+
+    //fetch and return the current weather conditions to the user
     fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey
     )
@@ -35,11 +45,3 @@ searchEl.addEventListener('click', function() {
     })
     return;
 });
-
-
-// function showWeather() {
-//     console.log(data);
-// }
-
-
-
