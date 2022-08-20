@@ -12,6 +12,7 @@ var currentTempEl = document.getElementById('currentTemp');
 var currentWindEl = document.getElementById('currentWind');
 var currentHumidityEl = document.getElementById('currentHumidity');
 var currentUVEl = document.getElementById('currentUV');
+var forecastCardsDiv = document.getElementById('forecastCards');
 var savedArray = [];
 var savedCities = JSON.parse(localStorage.getItem('savedCitiesString'));
 console.log(savedCities);
@@ -70,7 +71,37 @@ searchEl.addEventListener('click', function() {
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
+        var forecastCard = document.createElement('div');
+        forecastCard.setAttribute('class', 'card');
+        var forecastUl = document.createElement('ul');
+        forecastUl.setAttribute('class', 'forecastUl');
+        var forecastDate = document.createElement('li');
+        forecastDate.setAttribute('class', 'forecastDate');
+        var forecastIcon = document.createElement('li');
+        forecastIcon.setAttribute('class', 'forecastIcon');
+        var forecastTemp = document.createElement('li');
+        forecastTemp.setAttribute('class', 'forecastTemp');
+        var forecastWind = document.createElement('li');
+        forecastWind.setAttribute('class', 'forecastWind');
+        var forecastHumidity = document.createElement('li');
+        forecastHumidity.setAttribute('class', 'forecastHumidity');
+        forecastDate.textContent = data.data[0].datetime;
+        forecastIcon.textContent = data.data[0].weather.icon;
+        forecastTemp.textContent = "Temp: " + data.data[0].temp + "°F";
+        forecastWind.textContent = "Wind: " + data.data[0].wind_spd + " MPH";
+        forecastHumidity.textContent = "Humidity: " + data.data[0].rh + "%";
+
+
+        forecastUl.append(forecastDate);
+        forecastUl.append(forecastIcon);
+        forecastUl.append(forecastTemp);
+        forecastUl.append(forecastWind);
+        forecastUl.append(forecastHumidity);
+        forecastCard.append(forecastUl);
+        forecastCardsDiv.append(forecastCard);
+
+
+        
     })
     
 });
