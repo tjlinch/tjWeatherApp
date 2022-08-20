@@ -5,31 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <header>
         <h1>Weather App</h1>
     </header>
-    <aside>
-        <label for="cityInput">Search for a city</label>
-        <input type="text" name="cityInput" id="cityInput">
-        <input type="submit" value="Search" id="searchButton">
-        <hr>
-        <section id="searchHistory"></section>
-    </aside>
-    <section id="main">
-        <div id="currentWeather">
-            <h3 id="cityDateCurrent"></h3>
-            <p id="currentTemp"></p>
-            <p id="currentWind"></p>
-            <p id="currentHumidity"></p>
-            <p id="currentUV"></p>
+    <section id="container">
+        <aside>
+            <label for="cityInput">Search for a city</label>
+            <input type="text" name="cityInput" id="cityInput">
+            <input type="submit" value="Search" id="searchButton">
+            <hr>
+            <section id="searchHistory"></section>
+        </aside>
+        <section id="main">
+            <div id="currentWeather">
+                <h3 id="cityDateCurrent"></h3>
+                <p id="currentTemp"></p>
+                <p id="currentWind"></p>
+                <p id="currentHumidity"></p>
+                <p id="currentUV"></p>
 
-        </div>
-        <div id="forecast">
-            <h3>5-Day Forecast</h3>
-            <div id="forecastCards"></div>
-        </div>
+         </div>
+            <div id="forecast">
+             <h3>5-Day Forecast</h3>
+             <div id="forecastCards"></div>
+            </div>
+        </section>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>

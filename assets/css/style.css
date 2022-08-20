@@ -1,0 +1,31 @@
+header {
+    background-color: blue;
+    color: white;
+    height: 60px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#container {
+    display: flex;
+}
+
+aside {
+    width: 18%;
+    margin-right: 4%;
+    border-right: 1px solid black;
+}
+
+.savedBtn {
+    display: block;
+}
+
+#main {
+    width: 78%;
+}
+
+#currentWeather {
+    border: 2px solid black;
+}
+

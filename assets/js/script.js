@@ -58,6 +58,7 @@ searchEl.addEventListener('click', function() {
             currentUVEl.textContent = "UV Index: " + "placeholder";
 
         }
+        return;
     })
-    return;
+    
 });
