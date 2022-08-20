@@ -5,6 +5,7 @@ var cityInputEl = document.getElementById('cityInput');
 var searchEl = document.getElementById('searchButton');
 var searchHistoryEl = document.getElementById('searchHistory');
 var apiKey = "3a41fb29e2c055f4d8aacef579f499c3";
+var apiKey02 = "68253b2b3ea349f7ad570be3dc400edd";
 
 var currentHeaderEl = document.getElementById('cityDateCurrent');
 var currentTempEl = document.getElementById('currentTemp');
@@ -14,27 +15,27 @@ var currentUVEl = document.getElementById('currentUV');
 var savedArray = [];
 var savedCities = JSON.parse(localStorage.getItem('savedCitiesString'));
 console.log(savedCities);
-if (savedCities !== null) {
-    var searchLimiter = savedCities.length - 6;
-    var searchStart = savedCities.length - 1;
-}
+// if (savedCities !== null) {
+//     var searchLimiter = savedCities.length - 6;
+//     var searchStart = savedCities.length - 1;
+// }
 
 
-//for loop to display search history, renders the last 5 items in the array
-for (i = searchStart; i > searchLimiter; i--) {
-    var savedCity = document.createElement("button");
-    savedCity.textContent = savedCities[i];
-    savedCity.setAttribute('class', 'savedBtn');
-    searchHistoryEl.append(savedCity);
-}
+// //for loop to display search history, renders the last 5 items in the array
+// for (i = 0; i > savedCities.length; i++) {
+//     var savedCity = document.createElement("button");
+//     savedCity.textContent = savedCities[i];
+//     savedCity.setAttribute('class', 'savedBtn');
+//     searchHistoryEl.append(savedCity);
+// }
 
 
 //Capture user input and fetch weather for that city
 searchEl.addEventListener('click', function() {
     //capture user input, save values to localStorage, 
     var city = cityInputEl.value;
+    // savedCities.push(city);
     savedArray.push(city);
-    // console.log(searchArray);
     localStorage.setItem('savedCitiesString', JSON.stringify(savedArray));
 
 
@@ -60,5 +61,19 @@ searchEl.addEventListener('click', function() {
         }
         return;
     })
+
+    //fetch data for the 5 day forecast
+    fetch(
+        "https://api.weatherbit.io/v2.0/forecast/daily?city=" + city + "&country=US&key=" + apiKey02
+    )
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
     
 });
+
+
+
