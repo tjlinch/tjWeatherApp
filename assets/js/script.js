@@ -11,11 +11,14 @@ var currentTempEl = document.getElementById('currentTemp');
 var currentWindEl = document.getElementById('currentWind');
 var currentHumidityEl = document.getElementById('currentHumidity');
 var currentUVEl = document.getElementById('currentUV');
-
+var savedArray = [];
 var savedCities = JSON.parse(localStorage.getItem('savedCitiesString'));
 console.log(savedCities);
-var searchLimiter = savedCities.length - 6;
-var searchStart = savedCities.length - 1;
+if (savedCities !== null) {
+    var searchLimiter = savedCities.length - 6;
+    var searchStart = savedCities.length - 1;
+}
+
 
 //for loop to display search history, renders the last 5 items in the array
 for (i = searchStart; i > searchLimiter; i--) {
@@ -30,9 +33,9 @@ for (i = searchStart; i > searchLimiter; i--) {
 searchEl.addEventListener('click', function() {
     //capture user input, save values to localStorage, 
     var city = cityInputEl.value;
-    savedCities.push(city);
+    savedArray.push(city);
     // console.log(searchArray);
-    localStorage.setItem('savedCitiesString', JSON.stringify(savedCities));
+    localStorage.setItem('savedCitiesString', JSON.stringify(savedArray));
 
 
     //fetch and return the current weather conditions to the user
