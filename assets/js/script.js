@@ -71,6 +71,7 @@ searchEl.addEventListener('click', function() {
         return response.json();
     })
     .then(function (data) {
+       for (i = 0; i < 5; i++) {
         var forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'card');
         var forecastUl = document.createElement('ul');
@@ -85,11 +86,11 @@ searchEl.addEventListener('click', function() {
         forecastWind.setAttribute('class', 'forecastWind');
         var forecastHumidity = document.createElement('li');
         forecastHumidity.setAttribute('class', 'forecastHumidity');
-        forecastDate.textContent = data.data[0].datetime;
-        forecastIcon.textContent = data.data[0].weather.icon;
-        forecastTemp.textContent = "Temp: " + data.data[0].temp + "°F";
-        forecastWind.textContent = "Wind: " + data.data[0].wind_spd + " MPH";
-        forecastHumidity.textContent = "Humidity: " + data.data[0].rh + "%";
+        forecastDate.textContent = data.data[i].datetime;
+        forecastIcon.textContent = data.data[i].weather.icon;
+        forecastTemp.textContent = "Temp: " + data.data[i].temp + "°F";
+        forecastWind.textContent = "Wind: " + data.data[i].wind_spd + " MPH";
+        forecastHumidity.textContent = "Humidity: " + data.data[i].rh + "%";
 
 
         forecastUl.append(forecastDate);
@@ -99,6 +100,7 @@ searchEl.addEventListener('click', function() {
         forecastUl.append(forecastHumidity);
         forecastCard.append(forecastUl);
         forecastCardsDiv.append(forecastCard);
+       }
 
 
         
