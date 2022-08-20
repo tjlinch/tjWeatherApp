@@ -14,10 +14,10 @@ var currentUVEl = document.getElementById('currentUV');
 
 var savedCities = JSON.parse(localStorage.getItem('savedCitiesString'));
 console.log(savedCities);
-var searchLimiter = savedCities.length - 9;
+var searchLimiter = savedCities.length - 6;
 var searchStart = savedCities.length - 1;
 
-//for loop to display search history, renders the last 8 items in the array
+//for loop to display search history, renders the last 5 items in the array
 for (i = searchStart; i > searchLimiter; i--) {
     var savedCity = document.createElement("button");
     savedCity.textContent = savedCities[i];
