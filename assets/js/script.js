@@ -45,7 +45,14 @@ searchEl.addEventListener('click', function() {
 
     localStorage.setItem('savedCitiesString', JSON.stringify(savedArray));
     // localStorage.setItem('saved', JSON.stringify(savedCities));
-
+    
+    // trying to mess around with getting save history buttons back
+    for (i = 0; i < savedArray.length; i++) {
+        var savedCity = document.createElement('button');
+        savedCity.textContent = savedArray[i];
+        savedCity.setAttribute('class', 'savedBtn');
+        searchHistoryEl.append(savedCity);
+    }
 
 
     //fetch and return the current weather conditions to the user
@@ -61,7 +68,7 @@ searchEl.addEventListener('click', function() {
             //display message if input causes an error while retrieving data
             console.log("sorry");
         } else {
-            currentHeaderEl.textContent = city + " " + moment().format("MMM Do YY") + " " + data.weather[0].icon;
+            // currentHeaderEl.textContent = city + " " + moment().format("MMM Do YY") + " " + data.weather[0].icon;
             currentTempEl.textContent = "Temp: " + data.main.temp + "°F";
             currentWindEl.textContent = "Wind: " + data.wind.speed + " MPH";
             currentHumidityEl.textContent = "Humidity: " + data.main.humidity + " %";
@@ -79,7 +86,14 @@ searchEl.addEventListener('click', function() {
         return response.json();
     })
     .then(function (data) {
-        //add UV index to current weather display
+        //add Header w/ icon & UV index to current weather display
+        currentHeaderEl.textContent = city + ' ' + data.data[0].datetime;
+        var currentIcon = document.createElement('img');
+        currentIcon.setAttribute('id', 'currentIcon');
+        currentIcon.setAttribute('src', 'https://www.weatherbit.io/static/img/icons/' + data.data[0].weather.icon + '.png')
+        currentHeaderEl.append(currentIcon);
+
+
         currentUVEl.textContent = "UV Index: " + data.data[0].uv;
         if (data.data[0].uv <= 2) {
             currentUVEl.setAttribute('style', 'background-color: green;');
@@ -90,6 +104,8 @@ searchEl.addEventListener('click', function() {
         }
         console.log(data);
        
+
+        //create cards for 5 day forecast
         for (i = 1; i < 6; i++) {
         var forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'card');

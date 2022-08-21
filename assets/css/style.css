@@ -33,6 +33,10 @@ aside {
     display: flex;
 }
 
+.forecastIcon {
+    margin-left: -30%;
+}
+
 .forecastUl {
     list-style: none;
 }
