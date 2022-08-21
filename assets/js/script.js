@@ -57,7 +57,7 @@ searchEl.addEventListener('click', function() {
             currentTempEl.textContent = "Temp: " + data.main.temp + "°F";
             currentWindEl.textContent = "Wind: " + data.wind.speed + " MPH";
             currentHumidityEl.textContent = "Humidity: " + data.main.humidity + " %";
-            currentUVEl.textContent = "UV Index: " + "placeholder";
+            // currentUVEl.textContent = "UV Index: " + "placeholder";
 
         }
         return;
@@ -71,7 +71,18 @@ searchEl.addEventListener('click', function() {
         return response.json();
     })
     .then(function (data) {
-       for (i = 0; i < 5; i++) {
+        //add UV index to current weather display
+        currentUVEl.textContent = "UV Index: " + data.data[0].uv;
+        if (data.data[0].uv <= 2) {
+            currentUVEl.setAttribute('style', 'background-color: green;');
+        } else if (data.data[0].uv <= 7) {
+            currentUVEl.setAttribute('style', 'background-color: yellow;');
+        } else {
+            currentUVEl.setAttribute('style', 'background-color: red;')
+        }
+        console.log(data);
+       
+        for (i = 1; i < 6; i++) {
         var forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'card');
         var forecastUl = document.createElement('ul');
