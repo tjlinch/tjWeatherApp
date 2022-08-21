@@ -14,21 +14,25 @@ var currentHumidityEl = document.getElementById('currentHumidity');
 var currentUVEl = document.getElementById('currentUV');
 var forecastCardsDiv = document.getElementById('forecastCards');
 var savedArray = [];
-var savedCities = JSON.parse(localStorage.getItem('savedCitiesString'));
+var savedCities = JSON.parse(localStorage.getItem('saved'));
 console.log(savedCities);
+
+//this section worked at one point. I was able to succesfully append search history buttons to the aside, but it broke the app if local storage is empty. But without it, the buttons no longer render, and local storage replaces on refresh into the savedArray.
+
 // if (savedCities !== null) {
 //     var searchLimiter = savedCities.length - 6;
 //     var searchStart = savedCities.length - 1;
+//     for (i = 0; i > savedCities.length; i++) {
+//         var savedCity = document.createElement("button");
+//         savedCity.textContent = savedCities[i];
+//         savedCity.setAttribute('class', 'savedBtn');
+//         searchHistoryEl.append(savedCity);
+//     }
 // }
 
 
-// //for loop to display search history, renders the last 5 items in the array
-// for (i = 0; i > savedCities.length; i++) {
-//     var savedCity = document.createElement("button");
-//     savedCity.textContent = savedCities[i];
-//     savedCity.setAttribute('class', 'savedBtn');
-//     searchHistoryEl.append(savedCity);
-// }
+// // //for loop to display search history, renders the last 5 items in the array
+
 
 
 //Capture user input and fetch weather for that city
@@ -37,7 +41,11 @@ searchEl.addEventListener('click', function() {
     var city = cityInputEl.value;
     // savedCities.push(city);
     savedArray.push(city);
+    // savedCities.push(city);
+
     localStorage.setItem('savedCitiesString', JSON.stringify(savedArray));
+    // localStorage.setItem('saved', JSON.stringify(savedCities));
+
 
 
     //fetch and return the current weather conditions to the user
@@ -89,8 +97,10 @@ searchEl.addEventListener('click', function() {
         forecastUl.setAttribute('class', 'forecastUl');
         var forecastDate = document.createElement('li');
         forecastDate.setAttribute('class', 'forecastDate');
-        var forecastIcon = document.createElement('li');
+        
+        var forecastIcon = document.createElement('img');
         forecastIcon.setAttribute('class', 'forecastIcon');
+        
         var forecastTemp = document.createElement('li');
         forecastTemp.setAttribute('class', 'forecastTemp');
         var forecastWind = document.createElement('li');
@@ -98,7 +108,7 @@ searchEl.addEventListener('click', function() {
         var forecastHumidity = document.createElement('li');
         forecastHumidity.setAttribute('class', 'forecastHumidity');
         forecastDate.textContent = data.data[i].datetime;
-        forecastIcon.textContent = data.data[i].weather.icon;
+        forecastIcon.setAttribute('src', 'https://www.weatherbit.io/static/img/icons/' + data.data[i].weather.icon + '.png')
         forecastTemp.textContent = "Temp: " + data.data[i].temp + "°F";
         forecastWind.textContent = "Wind: " + data.data[i].wind_spd + " MPH";
         forecastHumidity.textContent = "Humidity: " + data.data[i].rh + "%";
